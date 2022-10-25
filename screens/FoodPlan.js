@@ -12,16 +12,22 @@ function FoodPlan({route, navigation}) {
                     {foodlist.map((foodItem) => (
                         <Pressable key={foodlist.indexOf(foodItem)}>
                             <View style={styles.menyknapp}>
-                                <Text style={styles.menyKnappTekst}
-                                      adjustsFontSizeToFit={true}>
-                                    {foodItem.name}
-                                </Text>
-                                <Image source={foodItem.image}/>
+                                <View style={styles.body}>
+                                    <Text style={styles.menyKnappTekst}
+                                          adjustsFontSizeToFit={true}>
+                                        {foodItem.name}
+                                    </Text>
+                                </View>
+                                <View style={styles.bilde}>
+                                    <Image source={foodItem.image} resizeMode={"contain"}/>
+                                </View>
                             </View>
                         </Pressable>))}
                 </ScrollView>
             </View>
-            <TopMenu/>
+            <View style={styles.topBar}>
+                <TopMenu/>
+            </View>
         </View>
     )
 }
@@ -38,6 +44,21 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     body: {
-        flex: 20,
+        flex: 10,
+    },
+    bilde: {
+        flex: 1,
+        margin: 10,
+        padding: 10,
+    },
+    topBar: {
+        flex: 1,
+        flexDirection: "row",
+        height: "100%",
+        width: "100%",
+        justifyContent: "space-evenly",
+        backgroundColor: "red",
+        paddingBottom: 10,
+        marginBottom: 10
     },
 });

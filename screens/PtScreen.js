@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
 
     pts: {
-        flex: 15
+        flex: 10
     },
 
     ptListItems: {

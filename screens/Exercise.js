@@ -6,7 +6,6 @@ import WebView from "react-native-webview";
 function Exercise({route, navigation}) {
     return (
         <View style={styles.mainContainer}>
-            <TopMenu/>
             <View style={styles.body}>
                 <WebView style={styles.WebViewContainer}
                          javaScriptEnabled={true}
@@ -15,6 +14,9 @@ function Exercise({route, navigation}) {
                          allowsInlineMediaPlayback={true}
                          mediaPlaybackRequiresUserAction={true}
                 />
+            </View>
+            <View>
+                <TopMenu/>
             </View>
         </View>
     )
@@ -33,5 +35,15 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 20,
+    },
+    topBar: {
+        flex: 1,
+        flexDirection: "row",
+        height: "100%",
+        width: "100%",
+        justifyContent: "space-evenly",
+        backgroundColor: "red",
+        paddingBottom: 10,
+        marginBottom: 10
     },
 });

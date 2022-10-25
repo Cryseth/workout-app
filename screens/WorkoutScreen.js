@@ -8,9 +8,6 @@ function WorkoutScreen({route, navigation}) {
     const dropdown = ["workout1", "workout2", "workout3"]
     const [selected, setSelected] = React.useState("")
     return (<View style={styles.mainContainer}>
-        <View style={styles.meny}>
-            <TopMenu/>
-        </View>
         <View style={styles.body}>
             <View>
                 <SelectList setSelected={setSelected} data={dropdown} onSelect={() => setSelected}/>
@@ -25,6 +22,9 @@ function WorkoutScreen({route, navigation}) {
             </View>
             <View style={styles.videoelement}></View>
         </View>
+        <View style={styles.topBar}>
+            <TopMenu/>
+        </View>
     </View>)
 }
 
@@ -35,8 +35,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    meny: {
+    topBar: {
         flex: 1,
+        flexDirection: "row",
+        height: "100%",
+        width: "100%",
+        justifyContent: "space-evenly",
+        backgroundColor: "red",
+        paddingBottom: 10,
+        marginBottom: 10
     },
     body: {
         flex: 20,

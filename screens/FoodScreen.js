@@ -4,26 +4,34 @@ import TopMenu from "../components/TopMenu"
 import SelectList from "react-native-dropdown-select-list/index";
 import mediterranean from "../assets/mediterraneanDiet.png"
 import FoodPlan from "./FoodPlan";
+import paneggs from "../assets/SheetPanEggsVeggies.png"
 
 function FoodScreen({route, navigation}) {
-    const mediterraneanDiet = [{name: "fish", image: mediterranean}, {
+    const mediterraneanDiet = [{name: "SheetPanEggsVeggies", image: paneggs, instructions: "TBD"}, {
         name: "more stuff",
         image: mediterranean
-    }, {name: "more stuff", image: mediterranean}, {name: "more stuff", image: mediterranean}, {
+        , instructions: "TBD"
+    }, {name: "more stuff", image: mediterranean, instructions: "TBD"}, {
+        name: "more stuff",
+        image: mediterranean,
+        instructions: "TBD"
+    }, {
         name: "morestuff",
         image: mediterranean
+        , instructions: "TBD"
     }]
-    const dropdown = [{name: "matplan1", image: mediterranean}, {
+    const dropdown = [{name: "matplan1", image: mediterranean, foodplan: mediterraneanDiet}, {
         name: "matplan2",
-        image: mediterranean
-    }, {name: "matplan3", image: mediterranean}]
+        image: mediterranean, foodplan: mediterraneanDiet
+    }, {name: "matplan3", image: mediterranean, foodplan: mediterraneanDiet}]
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.body}>
                 <ScrollView>
                     {dropdown.map((mealPlan) => (
                         <Pressable key={dropdown.indexOf(mealPlan)}
-                                   onPress={() => navigation.navigate("FoodPlan", {foodlist: mediterraneanDiet})}
+                                   onPress={() => navigation.navigate("FoodPlan", {foodlist: mealPlan.foodplan})}
                                    style={styles.foodItem}>
                             <Text
                                 adjustsFontSizeToFit={true} style={styles.foodItem}>
