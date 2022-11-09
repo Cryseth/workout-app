@@ -1,23 +1,42 @@
 import TopMenu from "../components/TopMenu";
-import {View, Button, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, Dimensions, Button} from 'react-native';
 import React from "react";
-import WebView from "react-native-webview";
+import {Video} from "expo-av";
+import deadlift from "../assets/Deadlift.mp4"
 
 function Exercise({route, navigation}) {
+    const {workoutplan} = route.params;
+    const video = React.useRef(null);
+    const [status, setStatus] = React.useState({});
     return (
         <View style={styles.mainContainer}>
             <View style={styles.body}>
-                <WebView style={styles.WebViewContainer}
-                         javaScriptEnabled={true}
-                         domStorageEnabled={true}
-                         source={{uri: 'https://www.youtube.com/watch?v=vRKDvt695pg'}}
-                         allowsInlineMediaPlayback={true}
-                         mediaPlaybackRequiresUserAction={true}
-                />
+                <ScrollView>
+                    {workoutplan.map((item) => (
+                        Object.entries(item).map((item2) => (
+                            <View style={styles.meny}>
+                                <View style={styles.video}>
+                                    <View style={styles.meny}>
+                                        <Text>{item2.desctiption}</Text>
+                                    </View>
+                                    <Video
+                                        ref={video}
+                                        style={styles.video}
+                                        source={{
+                                            uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+                                        }}
+                                        useNativeControls
+                                        isLooping
+                                        onPlaybackStatusUpdate={status => setStatus(() => status)}
+                                    />
+                                </View>
+                            </View>))))}
+                </ScrollView>
             </View>
-            <View>
+            <View style={styles.mainContainer}>
                 <TopMenu/>
             </View>
+
         </View>
     )
 }
@@ -34,16 +53,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     body: {
-        flex: 20,
+        flex: 10,
     },
-    topBar: {
+    video: {
         flex: 1,
-        flexDirection: "row",
-        height: "100%",
-        width: "100%",
-        justifyContent: "space-evenly",
-        backgroundColor: "red",
-        paddingBottom: 10,
-        marginBottom: 10
+        width: Dimensions.get('window').width,
+        height: 300
+    },
+    backgroundVideo: {
+        height: 300,
+        width: 300,
     },
 });

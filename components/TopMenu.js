@@ -1,7 +1,6 @@
 import {Pressable, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 import {useNavigation} from "@react-navigation/native";
-import Ionicons from '@expo/vector-icons/Ionicons';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 const menuOptions = ["hjem", "PT-er", "checking", "workouts", "Mat"]
@@ -13,7 +12,7 @@ function TopMenu() {
             {menuOptions.map((mOption) => (
                 <Pressable key={menuOptions.indexOf(mOption)}
                            onPress={() => navigation.navigate(mOption)}>
-                    <MaterialCommunityIcons name="weight" size={24} color="black"/>
+                    <MaterialCommunityIcons name="weight" size={20} color="black" style={styles.iconStyle}/>
                     <View style={styles.menyknapp}>
                         <Text style={styles.menyKnappTekst}
                               adjustsFontSizeToFit={true}>
@@ -44,11 +43,16 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'red',
         padding: 5,
-        margin: 2,
+        justifyContent: "space-evenly"
     },
 
     menyKnappTekst: {
         flex: 1,
-        justifyContent: "center"
+        justifyContent: "space-evenly",
     },
+    iconStyle: {
+        flex: 1,
+        justifyContent: "center",
+        paddingLeft: 15,
+    }
 });

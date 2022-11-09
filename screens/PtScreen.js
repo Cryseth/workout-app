@@ -1,4 +1,4 @@
-import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Button, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import ptImage from "../assets/ptMarius.png";
 import * as React from "react";
 import TopMenu from "../components/TopMenu";
@@ -51,17 +51,20 @@ function PtScreen({route, navigation}) {
                     <SelectList setSelected={setSelected} data={dropdown}
                                 search={false} placeholder={"level 1"}/>
                 </View>
+                <View>
+                    <Button title={"liste over sentere"} onPress={() => navigation.navigate("Sentere")}></Button>
+                </View>
                 <ScrollView>
                     {ptList.map((list) => list.dict[selected].map((pt) => {
                         return (
                             <View key={pt.name} style={styles.ptListItems}>
-                                <Text style={styles.ptListItems}>
+                                <Text style={styles.text}>
                                     navn : {pt.name} {"\n"}
                                     alder: {pt.age} {"\n"}
                                     ekspertise: {pt.expertise} {"\n"}
                                     nivå: {selected} {"\n"}
                                 </Text>
-                                <Image source={pt.image}/>
+                                <Image source={pt.image} style={styles.image}/>
                             </View>)
                     }))}
                 </ScrollView>
@@ -78,7 +81,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-
+    image: {
+        flex: 3,
+        resizeMode: "stretch",
+        width: "100%"
+    },
     PtTopHeader: {
         flex: 1,
         backgroundColor: "green",
@@ -93,7 +100,17 @@ const styles = StyleSheet.create({
     ptListItems: {
         flex: 1,
         flexDirection: "column",
+        borderWidth: 5,
 
+    },
+    text: {
+        flex: 1,
+        borderColor: "blue",
+        borderWidth: 5,
+        color: "red",
+        fontSize: 18,
+        fontStyle: "italic",
+        paddingLeft: 5,
     },
     topBar: {
         flex: 1,

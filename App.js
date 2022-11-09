@@ -10,6 +10,7 @@ import SentereScreen from "./screens/SentereScreen";
 import TopMenu from "./components/TopMenu";
 import Exercise from "./screens/Exercise";
 import FoodPlan from "./screens/FoodPlan";
+import Recipe from "./screens/Recipe"
 
 global.menuOptions = ["hjem", "Sentere", "workouts", "PT-er", "Mat"]
 
@@ -60,6 +61,7 @@ export default function App() {
                 <Stack.Screen name="Mat" component={FoodScreen}/>
                 <Stack.Screen name="Exercise" component={Exercise}/>
                 <Stack.Screen name="FoodPlan" component={FoodPlan}/>
+                <Stack.Screen name="Recipe" component={Recipe}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -1,10 +1,12 @@
 import {Dimensions, StyleSheet, View} from "react-native";
-import MapView from "react-native-maps";
+import MapView, {Marker} from "react-native-maps";
 import * as React from "react";
 
 function SentereScreen({route, navigation}) {
     return (<View style={styles.mainContainer}>
-        <MapView style={styles.map}/>
+        <MapView style={styles.map}>
+            <Marker coordinate={{latitude: 59.926902, longitude: 10.728923}}/>
+        </MapView>
     </View>);
 }
 

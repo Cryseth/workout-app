@@ -7,23 +7,32 @@ import FoodPlan from "./FoodPlan";
 import paneggs from "../assets/SheetPanEggsVeggies.png"
 
 function FoodScreen({route, navigation}) {
-    const mediterraneanDiet = [{name: "SheetPanEggsVeggies", image: paneggs, instructions: "TBD"}, {
-        name: "more stuff",
+    const mediterraneanDiet = [{
+        name: "SheetPanEggsVeggies",
+        image: paneggs,
+        instructions: "instructions",
+        description: "easy to make"
+    }, {
+        name: "fiske rett",
         image: mediterranean
-        , instructions: "TBD"
-    }, {name: "more stuff", image: mediterranean, instructions: "TBD"}, {
-        name: "more stuff",
+        , instructions: "instructions", description: "easy to make"
+    }, {name: "fiske rett", image: mediterranean, instructions: "instructions", description: "easy to make"}, {
+        name: "fiske rett",
         image: mediterranean,
-        instructions: "TBD"
+        instructions: "instructions", description: "easy to make"
     }, {
         name: "morestuff",
         image: mediterranean
-        , instructions: "TBD"
+        , instructions: "instructions", description: "easy to make"
     }]
-    const dropdown = [{name: "matplan1", image: mediterranean, foodplan: mediterraneanDiet}, {
-        name: "matplan2",
+    const dropdown = [{name: "Marius mat plan", image: mediterranean, foodplan: mediterraneanDiet}, {
+        name: "mediterranean",
         image: mediterranean, foodplan: mediterraneanDiet
-    }, {name: "matplan3", image: mediterranean, foodplan: mediterraneanDiet}]
+    }, {name: "low carb", image: mediterranean, foodplan: mediterraneanDiet}, {
+        name: "low carb2",
+        image: paneggs,
+        foodplan: mediterraneanDiet
+    }]
 
     return (
         <View style={styles.mainContainer}>
@@ -34,7 +43,7 @@ function FoodScreen({route, navigation}) {
                                    onPress={() => navigation.navigate("FoodPlan", {foodlist: mealPlan.foodplan})}
                                    style={styles.foodItem}>
                             <Text
-                                adjustsFontSizeToFit={true} style={styles.foodItem}>
+                                adjustsFontSizeToFit={true} style={styles.planText}>
                                 {mealPlan.name}
                             </Text>
                             <Image source={mealPlan.image} style={styles.image} resizeMode={"cover"}/>
@@ -58,19 +67,29 @@ const styles = StyleSheet.create({
     topbarView: {
         flex: 1,
         flexDirection: "row",
-        paddingBottom: 10,
-        marginBottom: 10
     },
 
     body: {
-        flex: 18
+        flex: 10
     },
 
     foodItem: {
-        flex: 1
+        flex: 5,
     },
     image: {
-        flex: 4
+        flex: 4,
+        height: 150,
+        resizeMode: "contain",
+        width: null,
+    },
+    planText: {
+        flex: 1,
+        fontStyle: "italic",
+        fontSize: 20,
+        paddingLeft: 5,
+        alignContent: "center",
+        backgroundColor: "black",
+        color: "red"
     }
 });
 
