@@ -1,17 +1,27 @@
-import {Dimensions, StyleSheet, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import MapView, {Marker} from "react-native-maps";
-import * as React from "react";
+import React from "react";
 
-function SentereScreen({route, navigation}) {
-    return (<View style={styles.mainContainer}>
-        <MapView style={styles.map}>
-            <Marker coordinate={{latitude: 59.926902, longitude: 10.728923}}/>
-        </MapView>
-    </View>);
-}
+const SentereScreen = ({route, navigation}) => {
+    const initialRegion = {
+        latitude: 59.926902,
+        longitude: 10.728923,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+    };
 
-export default SentereScreen;
-
+    return (
+        <View style={styles.mainContainer}>
+            <MapView style={styles.map} initialRegion={initialRegion}>
+                <Marker
+                    coordinate={{latitude: 59.926902, longitude: 10.728923}}
+                    pinColor={"green"}
+                    onPress={() => console.log("Marker pressed")}
+                />
+            </MapView>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -19,8 +29,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     map: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        flex: 1,
     },
-
 });
+
+export default SentereScreen;

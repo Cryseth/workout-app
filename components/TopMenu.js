@@ -1,58 +1,79 @@
-import {Pressable, StyleSheet, Text, View} from "react-native";
-import * as React from "react";
-import {useNavigation} from "@react-navigation/native";
-import {MaterialCommunityIcons} from '@expo/vector-icons';
+import React from "react";
+import {StyleSheet, View, TouchableOpacity, Text} from "react-native";
+import {FontAwesome} from "@expo/vector-icons";
 
-const menuOptions = ["hjem", "PT-er", "checking", "workouts", "Mat"]
+const TopMenu = ({options, selected}) => {
+    const navigateToScreen = (screenName) => {
+        options.navigate(screenName);
+    };
 
-function TopMenu() {
-    const navigation = useNavigation()
     return (
-        <View style={styles.topBar}>
-            {menuOptions.map((mOption) => (
-                <Pressable key={menuOptions.indexOf(mOption)}
-                           onPress={() => navigation.navigate(mOption)}>
-                    <MaterialCommunityIcons name="weight" size={20} color="black" style={styles.iconStyle}/>
-                    <View style={styles.menyknapp}>
-                        <Text style={styles.menyKnappTekst}
-                              adjustsFontSizeToFit={true}>
-                            {mOption}
-                        </Text>
-                    </View>
-                </Pressable>
-            ))}
-        </View>)
-}
-
-
-export default TopMenu;
+        <View style={styles.topMenu}>
+            <TouchableOpacity
+                style={[
+                    styles.menuItem,
+                    selected === "Home" ? styles.selectedItem : null,
+                ]}
+                onPress={() => navigateToScreen("Home")}
+            >
+                <FontAwesome name="home" size={25} color="white"/>
+                <Text style={styles.menuItemText}>Home</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[
+                    styles.menuItem,
+                    selected === "PtScreen" ? styles.selectedItem : null,
+                ]}
+                onPress={() => navigateToScreen("PtScreen")}
+            >
+                <FontAwesome name="user" size={25} color="white"/>
+                <Text style={styles.menuItemText}>PT</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[
+                    styles.menuItem,
+                    selected === "Sentere" ? styles.selectedItem : null,
+                ]}
+                onPress={() => navigateToScreen("Sentere")}
+            >
+                <FontAwesome name="map-marker" size={25} color="white"/>
+                <Text style={styles.menuItemText}>Sentere</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[
+                    styles.menuItem,
+                    selected === "Contact" ? styles.selectedItem : null,
+                ]}
+                onPress={() => navigateToScreen("Contact")}
+            >
+                <FontAwesome name="envelope" size={25} color="white"/>
+                <Text style={styles.menuItemText}>Contact</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
-    topBar: {
-        flex: 1,
+    topMenu: {
         flexDirection: "row",
-        height: "100%",
-        width: "100%",
-        justifyContent: "space-evenly",
         backgroundColor: "red",
-        paddingEnd: 5,
-        marginBottom: 5
+        alignItems: "center",
+        justifyContent: "space-around",
+        height: "100%",
     },
-    menyknapp: {
-        flex: 1,
-        borderWidth: 2,
-        borderColor: 'red',
-        padding: 5,
-        justifyContent: "space-evenly"
+    menuItem: {
+        alignItems: "center",
     },
-
-    menyKnappTekst: {
-        flex: 1,
-        justifyContent: "space-evenly",
+    menuItemText: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 15,
+        marginTop: 5,
     },
-    iconStyle: {
-        flex: 1,
-        justifyContent: "center",
-        paddingLeft: 15,
-    }
+    selectedItem: {
+        borderBottomWidth: 3,
+        borderBottomColor: "white",
+    },
 });
+
+export default TopMenu;

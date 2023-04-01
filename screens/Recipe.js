@@ -1,34 +1,37 @@
 import {Image, StyleSheet, Text, View} from "react-native";
-import * as React from "react";
+import React, {memo} from "react";
 
-function Recipe({route, navigation}) {
+const Recipe = ({route}) => {
     const {recipe} = route.params;
-    return (<View style={styles.mainContainer}>
-        <View style={styles.instuction}>
-            <Text> {recipe.instructions} </Text>
-        </View>
-        <View style={styles.image}>
+
+    return (
+        <View style={styles.mainContainer}>
+            <View style={styles.instruction}>
+                <Text style={styles.instructionText}>{recipe.instructions}</Text>
+            </View>
             <Image source={recipe.image} style={styles.image}/>
         </View>
-    </View>);
-}
-
-export default Recipe;
-
+    );
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
     },
-    instuction: {
+    instruction: {
         flex: 1,
-        borderColor: "red",
-        borderWidth: 2,
+    },
+    instructionText: {
+        fontSize: 18,
+        lineHeight: 24,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
     },
     image: {
         flex: 2,
         resizeMode: "cover",
-        width: null,
-        height: 200,
+        width: "100%",
     }
 });
+
+export default memo(Recipe);

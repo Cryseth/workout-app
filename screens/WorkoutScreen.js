@@ -1,75 +1,107 @@
-import {Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
-import TopMenu from "../components/TopMenu";
-import deadlift from "../assets/deadlift.png"
-import SelectList from "react-native-dropdown-select-list/index";
-import deadliftVid from "../assets/Deadlift.mp4"
+import {Image, Picker, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
 import React from "react";
+import deadlift from "../assets/deadlift.png";
 
-function WorkoutScreen({route, navigation}) {
-    const dropdown = ["Marius-Styrke-plan", "Marius-endurance-plan", "Marius-allAround-plan"]
-    const [selected, setSelected] = React.useState("")
-    const styrkeplan = [{
-        ovelse1: {
-            img: deadlift,
-            video: "https://www.youtube.com/watch?v=vRKDvt695pg",
-            desctiption: "steg1:bla bla \n steg2:mer bla bla"
+const WorkoutScreen = ({navigation}) => {
+    const workoutPlans = [
+        {
+            name: "Marius-Styrke-plan",
+            exercises: [
+                {
+                    img: deadlift,
+                    video: "https://www.youtube.com/watch?v=vRKDvt695pg",
+                    description: "Step 1: bla bla \n Step 2: more bla bla"
+                }
+            ]
+        },
+        {
+            name: "Marius-endurance-plan",
+            exercises: [
+                {
+                    img: deadlift,
+                    video: "https://www.youtube.com/watch?v=vRKDvt695pg",
+                    description: "Step 1: bla bla \n Step 2: more bla bla"
+                }
+            ]
+        },
+        {
+            name: "Marius-allAround-plan",
+            exercises: [
+                {
+                    img: deadlift,
+                    video: "https://www.youtube.com/watch?v=vRKDvt695pg",
+                    description: "Step 1: bla bla \n Step 2: more bla bla"
+                }
+            ]
         }
-    }]
-    const styrkeplanner = [{name: "Marius-Styrke-plan", plan: styrkeplan}, {
-        name: "Marius-endurance-plan",
-        plan: styrkeplan
-    }, {name: "Marius-allAround-plan", plan: styrkeplan}]
-    return (<View style={styles.mainContainer}>
-        <View style={styles.body}>
-            <View>
-                <SelectList setSelected={setSelected} data={dropdown} onSelect={() => setSelected}/>
-            </View>
-            <ScrollView>
-                {styrkeplanner.map((plan) => (
-                    <Pressable onPress={() => navigation.navigate("Exercise", {workoutplan: plan.plan})}
-                               style={styles.videoelement}>
-                        <View style={styles.videoelement}>
-                            <Text>{plan.name}</Text>
-                            <Image source={deadlift} style={styles.videoelement}/>
-                        </View>
-                    </Pressable>))}
-            </ScrollView>
-            <View style={styles.videoelement}></View>
-        </View>
-        <View style={styles.topBar}>
-            <TopMenu/>
-        </View>
-    </View>)
-}
+    ];
+    const [selectedPlan, setSelectedPlan] = React.useState(workoutPlans[0]);
 
-export default WorkoutScreen;
+    return (
+        <View style={styles.mainContainer}>
+            <View style={styles.menu}>
+                <Picker
+                    selectedValue={selectedPlan}
+                    onValueChange={(itemValue) => setSelectedPlan(itemValue)}
+                >
+                    {workoutPlans.map((plan) => (
+                        <Picker.Item key={plan.name} label={plan.name} value={plan}/>
+                    ))}
+                </Picker>
+            </View>
+            <ScrollView contentContainerStyle={styles.scrollViewContent}>
+                {selectedPlan.exercises.map((exercise) => (
+                    <Pressable
+                        key={exercise.description}
+                        onPress={() => navigation.navigate("Exercise", {workoutplan: selectedPlan})}
+                        style={styles.exerciseContainer}
+                    >
+                        <Text style={styles.exerciseName}>{selectedPlan.name}</Text>
+                        <Image source={exercise.img} style={styles.exerciseImage}/>
+                    </Pressable>
+                ))}
+
+            </ScrollView>
+            <View style={styles.footer}/>
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: "center"
     },
-    topBar: {
+    menu: {
         flex: 1,
-        flexDirection: "row",
-        height: "100%",
-        width: "100%",
-        justifyContent: "space-evenly",
-        backgroundColor: "red",
-        paddingBottom: 10,
-        marginBottom: 10
+        backgroundColor: "#F0F0F0",
+        alignItems: "center",
+        justifyContent: "center"
     },
-    body: {
-        flex: 12,
+    scrollViewContent: {
+        flexGrow: 1,
+        justifyContent: "center",
+        alignItems: "stretch"
     },
-
-    videoelement: {
+    exerciseContainer: {
         flex: 1,
         borderWidth: 2,
-        borderColor: 'red',
-        alignContent: "stretch",
-        resizeMode: "cover",
-        width: null,
-        height: 300
+        borderColor: "red",
+        alignItems: "stretch",
+        padding: 10,
+        margin: 10
+    },
+    exerciseName: {
+        fontWeight: "bold",
+        marginBottom: 10
+    },
+    exerciseImage: {
+        flex: 1,
+        resizeMode: "cover"
+    },
+    footer: {
+        flex: 1
     }
 });
+
+export default WorkoutScreen;
